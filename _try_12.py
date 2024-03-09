@@ -19,14 +19,14 @@ while True:
     results = pose.process(imgRGB)
     # print(results.pose_landmarks)
 
-    if results.pose_landmarks:
-        mpDraw.draw_landmarks(img, results.pose_landmarks, mpPose.POSE_CONNECTIONS)
+    #if results.pose_landmarks:
+        #mpDraw.draw_landmarks(img, results.pose_landmarks, mpPose.POSE_CONNECTIONS)
 
     nose = results.pose_landmarks.landmark[mpPose.PoseLandmark.NOSE]
     h, w, c = img.shape
     x, y = int(nose.x * w), int(nose.y * h)
 
-    cv2.line(img, (0, int(0.7*h)), (w, int(0.7*h)), (0, 255, 0), 2)
+    #cv2.line(img, (0, int(0.7*h)), (w, int(0.7*h)), (0, 255, 0), 2)
 
     if y > 0.7*h:
         playsound.playsound("beep-02.wav", False)
