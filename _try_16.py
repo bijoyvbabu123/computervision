@@ -32,17 +32,17 @@ while True:
             initial_pose = {}
             for idx, landmark in enumerate(results.pose_landmarks.landmark):
                 landmark_name = mpPose.PoseLandmark(idx).name  # Use index for name
-                initial_pose[landmark_name] = (landmark.x, landmark.y)
+                initial_pose[landmark_name] = (landmark.x * img.shape[1], landmark.y * img.shape[0])
             print("Initial posture captured!")
 
         # Check for variations from initial pose (normalized)
-        threshold = 1  # You can adjust this threshold value (0-1)
+        threshold = 0.1  # You can adjust this threshold value (0-1)
         for landmark_name, (x, y) in initial_pose.items():
             current_landmark = results.pose_landmarks.landmark[mpPose.PoseLandmark[landmark_name]]
             current_x, current_y = int(current_landmark.x * img.shape[1]), int(current_landmark.y * img.shape[0])
             variation_x = calculate_normalized_variation(x, current_x, img.shape[1])
             variation_y = calculate_normalized_variation(y, current_y, img.shape[0])
-            if variation_x > threshold or variation_y > threshold:
+            if variation_x > threshold and variation_y > threshold:
                 playsound.playsound("beep-02.wav", False)
                 break  # Only beep once per frame
 
