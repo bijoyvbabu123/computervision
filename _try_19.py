@@ -94,7 +94,7 @@ while True:
                 variation_z = calculate_normalized_variation(z, current_z, 1)  # Normalize by 1 for z-axis (no image dimension)
                 # You can implement logic based on variations in x, y, and z
 
-                if variation_x > threshold or variation_y > threshold or variation_z > threshold:
+                if variation_x > threshold or variation_y > threshold or variation_z > int(threshold/10):
                     playsound.playsound("beep-02.wav", False)
                     break  # Only beep once per frame
 
